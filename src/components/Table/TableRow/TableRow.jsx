@@ -1,6 +1,6 @@
-export const TableRow = ({ user }) => {
+export const TableRow = ({ user, onClick }) => {
   return (
-    <tr>
+    <tr onClick={() => onClick(user)} style={{ cursor: "pointer" }}>
       <td>{user.lastName}</td>
 
       <td>{user.firstName}</td>
