@@ -1,0 +1,21 @@
+.page__wrapper {
+  margin-top: 15px;
+  display: flex;
+  align-self: center;
+}
+
+.page__wrapper span {
+  color: #fff;
+}
+
+.page {
+  width: 30px;
+  padding: 5px;
+  border: 1px solid #003a8f;
+  cursor: pointer;
+}
+
+.page__current {
+  border: 2px solid #f5e6ca;
+  font-weight: bold;
+}

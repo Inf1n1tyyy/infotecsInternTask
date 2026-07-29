@@ -4,20 +4,26 @@ import { UsersTable } from "../../components/Table/UsersTable/UsersTable";
 import { useFetching } from "../../hooks/useFetching";
 import { Loader } from "../../components/Loader/Loader";
 import { UserModal } from "../../components/Modal/UserModal";
+import { getNextOrder } from "../../utils/order";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { getPageCount, getSkip } from "../../utils/pages";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   const [fetchUsers, isLoading, error] = useFetching(async (params) => {
     const data = await UserService.getUsers(params);
     setUsers(data.users);
+    setTotalUsers(data.total);
   });
 
   const [fetchFilteredUsers, isFilterLoading, filterError] = useFetching(
-    async (key, value) => {
-      const data = await UserService.filter(key, value);
+    async (key, value, params) => {
+      const data = await UserService.filter(key, value, params);
       setUsers(data.users);
+      setTotalUsers(data.total);
     },
   );
 
@@ -31,15 +37,14 @@ export const UsersPage = () => {
     value: "",
   });
 
-  const orders = ["none", "asc", "desc"];
-  const getNextOrder = (currentOrder) => {
-    const currentIndex = orders.indexOf(currentOrder);
-    const nextIndex = (currentIndex + 1) % orders.length;
+  const [page, setPage] = useState(1);
+  const [limit] = useState(20);
 
-    return orders[nextIndex];
-  };
+  const skip = getSkip(page, limit);
+  const totalPages = getPageCount(totalUsers, limit);
 
   const handleSort = (field) => {
+    setPage(1);
     setSort((prev) => {
       if (prev.sortBy !== field) {
         return {
@@ -65,48 +70,41 @@ export const UsersPage = () => {
   };
 
   const handleFilterUsers = (key, value) => {
-    setFilter({
-      key,
-      value,
-    });
-
-    fetchFilteredUsers(key, value);
+    setFilter({ key, value });
+    setPage(1);
   };
 
   const handleResetFilter = () => {
-    setFilter({
-      key: "",
-      value: "",
-    });
-
+    setFilter({ key: "", value: "" });
     fetchUsers({});
+    setPage(1);
   };
-
-  useEffect(() => {
-    if (filter.key && filter.value) {
-      fetchFilteredUsers(filter.key, filter.value);
-    } else {
-      const params =
-        sort.order === "none"
-          ? {}
-          : {
-              sortBy: sort.sortBy,
-              order: sort.order,
-            };
-
-      fetchUsers(params);
-    }
-  }, [sort, filter]);
 
   const handleUserClick = (user) => {
     setSelectedUser(user);
   };
 
+  useEffect(() => {
+    if (filter.key && filter.value) {
+      fetchFilteredUsers(filter.key, filter.value, { limit, skip });
+    } else {
+      const params = {
+        limit,
+        skip,
+      };
+
+      if (sort.order !== "none") {
+        params.sortBy = sort.sortBy;
+        params.order = sort.order;
+      }
+      fetchUsers(params);
+    }
+  }, [sort, filter, page]);
+
   return (
     <>
       {error && <span>{error.message}</span>}
       {isLoading && <Loader />}
-
       <UsersTable
         users={users}
         sort={sort}
@@ -116,6 +114,7 @@ export const UsersPage = () => {
         onReset={handleResetFilter}
         onUserClick={handleUserClick}
       />
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />
     </>

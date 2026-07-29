@@ -35,6 +35,4 @@ export default class UserService {
       throw error;
     }
   }
-
-  static async getById(id) {}
 }
