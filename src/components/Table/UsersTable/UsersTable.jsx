@@ -1,11 +1,14 @@
+import { TableFilter } from "../TableFilter/TableFilter";
+import { Loader } from "../../Loader/Loader";
 import { TableHeader } from "../TableHeader/TableHeader";
 import { TableRow } from "../TableRow/TableRow";
-import { TableFilter } from "../TableFilter/TableFilter";
 
 import "./UsersTable.css";
 
 export const UsersTable = ({
   users,
+  isLoading,
+  isFilterLoading,
   sort,
   onSort,
   filter,
@@ -21,15 +24,22 @@ export const UsersTable = ({
         onFilterChange={onFilterChange}
         onReset={onReset}
       />
-      <table>
-        <TableHeader sort={sort} onSort={onSort} />
 
-        <tbody>
-          {users.map((user) => (
-            <TableRow key={user.id} user={user} onClick={onUserClick} />
-          ))}
-        </tbody>
-      </table>
+      {isLoading || isFilterLoading ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Loader />
+        </div>
+      ) : (
+        <table>
+          <TableHeader sort={sort} onSort={onSort} />
+
+          <tbody>
+            {users.map((user) => (
+              <TableRow key={user.id} user={user} onClick={onUserClick} />
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 };

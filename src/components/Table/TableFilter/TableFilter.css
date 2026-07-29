@@ -34,6 +34,11 @@ select {
   transition: 0.2s ease;
 }
 
+select option:hover {
+  color: red;
+  background-color: yellow;
+}
+
 input:focus,
 select:focus {
   outline: none;

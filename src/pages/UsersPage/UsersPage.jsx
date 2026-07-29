@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import UserService from "../../api/UserService";
-import { UsersTable } from "../../components/Table/UsersTable/UsersTable";
 import { useFetching } from "../../hooks/useFetching";
-import { Loader } from "../../components/Loader/Loader";
-import { UserModal } from "../../components/Modal/UserModal";
 import { getNextOrder } from "../../utils/order";
-import { Pagination } from "../../components/Pagination/Pagination";
 import { getPageCount, getSkip } from "../../utils/pages";
+import { UsersTable } from "../../components/Table/UsersTable/UsersTable";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { UserModal } from "../../components/Modal/UserModal";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -104,9 +103,11 @@ export const UsersPage = () => {
   return (
     <>
       {error && <span>{error.message}</span>}
-      {isLoading && <Loader />}
+      {filterError && <span>{filterError.message}</span>}
       <UsersTable
         users={users}
+        isLoading={isLoading}
+        isFilterLoading={isFilterLoading}
         sort={sort}
         onSort={handleSort}
         filter={filter}
@@ -114,6 +115,7 @@ export const UsersPage = () => {
         onReset={handleResetFilter}
         onUserClick={handleUserClick}
       />
+
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />

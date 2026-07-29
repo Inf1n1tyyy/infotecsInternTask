@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./TableFilter.css";
+
 export const TableFilter = ({ onFilterChange, onReset }) => {
   const [filters, setFilters] = useState({
     lastName: "",
@@ -20,7 +21,7 @@ export const TableFilter = ({ onFilterChange, onReset }) => {
 
   const handleSubmit = () => {
     const filledFields = Object.entries(filters).filter(
-      ([_, value]) => value.trim() !== "",
+      ([_, value]) => value !== "",
     );
 
     if (filledFields.length === 0) {

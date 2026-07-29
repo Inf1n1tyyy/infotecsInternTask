@@ -1,6 +1,7 @@
 import { getPagesArray } from "../../utils/pages";
 
 import "./Pagination.css";
+
 export const Pagination = ({ totalPages, page, onPageChange }) => {
   const pagesArray = getPagesArray(totalPages);
   return (
