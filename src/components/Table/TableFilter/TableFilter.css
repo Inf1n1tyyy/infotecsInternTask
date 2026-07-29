@@ -1,0 +1,80 @@
+.filter__block {
+  background: #f5e6ca;
+  border: 1px solid #d9d4c7;
+  max-width: 1180px;
+  border-radius: 10px;
+  padding: 15px 10px;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.filters__container {
+  display: flex;
+  gap: 12px;
+}
+
+.btns__container {
+  display: flex;
+  gap: 12px;
+}
+
+input,
+select {
+  background: #ffffff;
+  border: 1px solid #c8c2b5;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #1a2b4c;
+  transition: 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #7a9bb5;
+  box-shadow: 0 0 0 3px rgba(107, 147, 179, 0.2);
+}
+
+input::placeholder {
+  color: #a09a8c;
+}
+
+.btn {
+  height: 38px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn__primary {
+  background: #0047ab;
+  color: #ffffff;
+  border: none;
+}
+
+.btn__primary:hover {
+  background: #003a8f;
+}
+
+.btn__secondary {
+  background: transparent;
+  color: #0047ab;
+  border: 1px solid #0047ab;
+}
+
+.btn__secondary:hover {
+  background: #ffffff;
+}
+
+.filter__block span {
+  color: #ce0000;
+}

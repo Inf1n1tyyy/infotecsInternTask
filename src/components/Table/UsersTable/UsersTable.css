@@ -3,12 +3,26 @@ table {
   max-width: 1400px;
   margin: 0 auto;
   border-collapse: collapse;
+  color: #1a2b4c;
 }
 
-thead {
-  color: green;
+th {
+  background-color: #d9c5a0;
+  border: 1px solid #7a9bb5;
+}
+
+th:nth-child(-n + 6) {
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f0ebe0;
+}
+
+tr:nth-child(odd) {
+  background-color: #f5e6ca;
 }
 
 td {
-  border: 1px solid white;
+  border: 1px solid #7a9bb5;
 }
