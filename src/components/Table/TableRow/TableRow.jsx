@@ -21,3 +21,27 @@ export const TableRow = ({ user, onClick }) => {
     </tr>
   );
 };
+
+// export const TableRow = ({ user, onClick, widths }) => {
+//   return (
+//     <tr onClick={() => onClick(user)} style={{ cursor: "pointer" }}>
+//       <td style={{ width: widths.lastName }}>{user.lastName}</td>
+
+//       <td style={{ width: widths.firstName }}>{user.firstName}</td>
+
+//       <td style={{ width: widths.maidenName }}>{user.maidenName}</td>
+
+//       <td style={{ width: widths.age }}>{user.age}</td>
+
+//       <td style={{ width: widths.gender }}>{user.gender}</td>
+
+//       <td style={{ width: widths.phone }}>{user.phone}</td>
+
+//       <td style={{ width: widths.email }}>{user.email}</td>
+
+//       <td style={{ width: widths.country }}>{user.address.country}</td>
+
+//       <td style={{ width: widths.city }}>{user.address.city}</td>
+//     </tr>
+//   );
+// };

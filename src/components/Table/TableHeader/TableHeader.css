@@ -1,0 +1,20 @@
+th {
+  background-color: #d9c5a0;
+  border: 1px solid #7a9bb5;
+  position: relative;
+}
+
+th:nth-child(-n + 6) {
+  cursor: pointer;
+}
+
+.column__resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+  background-color: #f5e6ca;
+}
