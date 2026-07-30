@@ -2,7 +2,11 @@ import { useState } from "react";
 
 import "./TableFilter.css";
 
-export const TableFilter = ({ onFilterChange, onReset }) => {
+export const TableFilter = ({
+  onFilterChange,
+  onReset,
+  onResetColumnWidths,
+}) => {
   const [filters, setFilters] = useState({
     lastName: "",
     firstName: "",
@@ -102,7 +106,10 @@ export const TableFilter = ({ onFilterChange, onReset }) => {
           Отфильтровать
         </button>
         <button className="btn btn__secondary" onClick={handleReset}>
-          Сбросить
+          Сбросить фильтр
+        </button>
+        <button className="btn btn__secondary" onClick={onResetColumnWidths}>
+          Сбросить ширину колонок
         </button>
       </div>
       {error && <span>{error}</span>}

@@ -108,9 +108,7 @@ export const UsersPage = () => {
         users={users}
         isLoading={isLoading}
         isFilterLoading={isFilterLoading}
-        sort={sort}
         onSort={handleSort}
-        filter={filter}
         onFilterChange={handleFilterUsers}
         onReset={handleResetFilter}
         onUserClick={handleUserClick}

@@ -10,14 +10,12 @@ export const UsersTable = ({
   users,
   isLoading,
   isFilterLoading,
-  sort,
   onSort,
-  filter,
   onFilterChange,
   onReset,
   onUserClick,
 }) => {
-  const [columnWidths, setColumnWidths] = useState({
+  const defaultColumnWidths = {
     lastName: 117,
     firstName: 108,
     maidenName: 108,
@@ -27,7 +25,9 @@ export const UsersTable = ({
     email: 399,
     country: 142,
     city: 133,
-  });
+  };
+
+  const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
 
   const handleResizeStart = (e, column) => {
     e.stopPropagation();
@@ -53,13 +53,17 @@ export const UsersTable = ({
     window.addEventListener("mouseup", handleMouseUp);
   };
 
+  const handleResetColumnWidths = () => {
+    setColumnWidths(defaultColumnWidths);
+  };
+
   return (
     <>
       <h1>Информация о пользователях</h1>
       <TableFilter
-        filter={filter}
         onFilterChange={onFilterChange}
         onReset={onReset}
+        onResetColumnWidths={handleResetColumnWidths}
       />
 
       {isLoading || isFilterLoading ? (
